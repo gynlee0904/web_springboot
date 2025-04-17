@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>bootstrap 회원가입 + 스프링부트 </title>
-<link rel="stylesheet" href="./css/bootstrap.css?v=<%=date%>">
-<script src="./js/bootstrap.js?v=<%=date%>"></script>
+<link rel="stylesheet" href="./bootstrap/css/bootstrap.css?v=<%=date%>">
+<script src="./bootstrap/js/bootstrap.js?v=<%=date%>"></script>
 </head>
 <body>
 <form id="form" method="post" action="./join.do">

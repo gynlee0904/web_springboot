@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.boot.cdn_mapper">
+
+<!-- 이미지 등록 -->
 <insert id="cdn_insert">
-	INSERT INTO API_IMG (ORI_FILE, NEW_FILE, API_FILE, FILE_URL, FILE_DATE) VALUES (#{ORI_FILE},#{NEW_FILE},#{API_FILE},#{FILE_URL},SYSDATE)
+	INSERT INTO API_IMG (ORI_FILE, NEW_FILE, API_FILE, FILE_URL, FILE_BIN, FILE_DATE) VALUES (#{ORI_FILE},#{NEW_FILE},#{API_FILE},#{FILE_URL},#{FILE_BIN},SYSDATE)
 </insert>
 
+<!-- 전체리스트 출력  -->
+<select id="cdn_select" resultType="kr.co.boot.file_DTO" parameterType="Map">
+	SELECT * FROM API_IMG
+	<!-- 조건이 맞으면 where이 붙고 안맞으면 패스 (동적쿼리문) -->
+	<if test="part == 1">  
+		WHERE AIDX=#{AIDX}
+	</if>
+	<if test="part == 3">  <!-- 사용자가 업로드한 파일명으로 검색 -->
+		WHERE ORI_FILE LIKE '%' || #{word} || '%' 
+	</if>
+ 	ORDER BY AIDX DESC
+</select>
 
+<!-- cdn 이미지 url 가져오기 -->
+<select id="cdn_imgs" resultType="String">
+	SELECT FILE_URL FROM API_IMG WHERE API_FILE = #{APINO}
+</select>
+
+<delete id="cdn_delete" parameterType="String">
+	DELETE FROM API_IMG WHERE AIDX=#{AIDX}
+</delete>
 
 </mapper>
