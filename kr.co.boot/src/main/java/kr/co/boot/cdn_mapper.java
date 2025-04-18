@@ -15,4 +15,11 @@ public interface cdn_mapper {
 	String cdn_imgs(String APINO);  //cdn 이미지 url 가져오기
 	int cdn_delete(String AIDX);  //cdn 이미지 삭제 
 	
+	
+	
+	/*=== AOP 수업관련 ======================================================*/
+	int log_table(String MID, String LOG_RCD);
+	
 }
+
+

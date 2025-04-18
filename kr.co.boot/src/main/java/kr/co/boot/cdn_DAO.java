@@ -44,7 +44,11 @@ public class cdn_DAO {
 	public int cdn_del(String AIDX) {
 		int result = this.cmp.cdn_delete(AIDX);
 		return result;
-		
 	}
 
+	/*=== AOP 수업관련 ======================================================*/
+	public int log_table(String mid, String log_rcd) {
+		int result = this.cmp.log_table(mid, log_rcd);
+		return result;
+	}
 }

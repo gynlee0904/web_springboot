@@ -29,4 +29,13 @@
 	DELETE FROM API_IMG WHERE AIDX=#{AIDX}
 </delete>
 
+
+
+<!-- **************AOP LOG TABLE************** -->
+<insert id="log_table" parameterType="String">
+	INSERT INTO LOG_TBL (MID, MTODAY, LOG_RCD) VALUES (#{MID}, SYSDATE, #{LOG_RCD})
+</insert>
+
+
+
 </mapper>
