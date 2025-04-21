@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="~{/index.html :: title}"></head>
+<body>
+<header th:replace="~{/index.html :: top}"> </header>
+<form id="f" method="GET" action="./search_shop.do" onsubmit="return checkes()">
+<nav th:replace="~{/index.html :: menu(${menulist})}"> </nav>
+</form>
+<section th:replace="~{/index.html :: banner}"></section>
+<article th:replace="~{/index.html :: product}"></article>
+<footer th:replace="~{/index.html :: footer}"></footer>
+</body>
+<script>
+function checkes(){
+	if(f.q.value==""){
+		alert("검색어를 입력하셔야 합니다.");
+		return false;
+	}
+	else{
+		f.submit();
+	}
+	
+	
+}
+</script>
+</html>

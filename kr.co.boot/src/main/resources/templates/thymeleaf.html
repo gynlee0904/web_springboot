@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf 전체 구문 기본 언어(Spring EL 표현식)</title>
+</head>
+<body>
+<!-- Spring EL 형태 -->
+
+<div th:text="${code}"></div><br>
+<div th:utext="${code}"></div><br>
+<!-- th:text => innerText와 같음 
+	 th:utext => innerHTML과 같음  -->
+	 
+
+<span>[[${code}]]</span><br>
+<span>[(${code})]</span><br>
+<!-- 대괄호 2개 => 태그안에 직접 변수값을 출력하는형태 (text 기본)  
+	 대괄호 안에 괄호 => 태그안에 직접 변수값을 출력하는형태 (html 기본)  -->
+	 
+	 
+<p>사용자정보</p>
+<ul>
+<li>[[${all["mid"]}]]</li>
+<li>[[${all.mage}]]</li>
+</ul>	 	 <br>
+<!-- 키배열 출력방법 => 달러{맵이름["키"]} or 달러{맵이름.키}  -->
+
+
+<p>검색어 : <input type="text" name="search" th:value="${search}"> </p> <br>
+<!-- th:value="" => 인풋에 밸류값에 데이터를 출력해야 할 경우 사용  -->
+
+
+<a th:href="|./page.do/url=${page}|">링크 </a>  <br>
+<a th:href="|${page}|">링크2 </a>  <br>
+<!-- th:href="|링크 주소 혹은 변수값|" => 링크값을 받아줌(get 이동) -->
+
+
+<div th:text="${session.muser}"></div>  <br>
+<div>[[${session.muser}]]</div>	   <br>
+<!-- 달러{session.키값} => Controller에서 등록된 session값을 가져옴  -->
+
+
+<span th:with="product='냉장고'">
+<p>[[${product}]]</p>
+</span>
+<!-- Thymeleaf의 변수선언 => th:with="가상변수명='값'" 
+	 변수 선언한 태그 안에서만 출력됨. (마크업기준이라) -->
+
+
+<span th:if="${result=='ok'}">동의함</span>
+<span th:if="${result=='no'}">동의안함</span> <br>
+<!-- th:if="" => 타임리프 조건문으로 오브젝트 관련사항 핸들링 
+	 th:unless="" => ""내용의 반대. 
+	 ex) th:unless="${result=='no'}"  = no가 아닐경우(=yes일 때) -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

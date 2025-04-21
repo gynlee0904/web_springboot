@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!-- xmlns:th="" : 타임리프를 명시하는 속성값 
+	 JSTL, JSP 사용하지 않는다는 뜻 -->
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf 서브페이지</title>
+<style th:replace="~{/sample.html :: styles}"></style>
+</head>
+<body>
+<header th:replace="~{/sample.html :: top(${menu})}"></header>
+
+<main>
+게시판 리스트 출력
+
+
+</main>
+
+<footer th:replace="~{/sample.html :: copy(${copy1})}"></footer>
+</body>
+</html>

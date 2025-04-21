@@ -1,10 +1,12 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Thymeleaf 샘플파일</title>
+<title>template jsp test</title>
 </head>
 <body>
-templates 폴더에 만들어야함 
+template jsp
+
 </body>
 </html>

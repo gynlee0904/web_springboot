@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf 샘플파일</title>
+<style th:fragment="styles">
+
+.a{
+	width : 100%; height : 150px; background-color: yellow;
+}
+
+.b{
+	width : 100%; height : 500px; background-color: pink;
+}
+
+.c{
+	width : 100%; height : 200px; background-color: orange;
+}
+
+</style>
+</head>
+<body>
+<header class="a" th:fragment="top(aa)">
+<!-- th:  => 타임리프 태그 코드. 타임리프를 사용한다는 뜻~ 
+	fragment => 가상의 변수값. 영역처리를 담당하는 역할. html태그 기준으로 레이아웃 설정(html 마크업 매우 중요)
+	 	fragment는 같은 이름을 사용할 수 있음. 단 동일한 이름을 쓰면 해당 html태그를 전부 다 가져옴 
+	replace="~{가져올 html경로 :: fragment이름}" => html태그를 로드하는 역할
+		해당 페이지에 있는 기존 태그를 삭제 후 원본페이지에 있는 태그와 레이아웃을 통째로 로드함  	
+	insert="~{가져올 html경로 :: fragment이름}" => replace와 동일하게 html태그를 로드하는 역할이지만 
+		기존 태그를 살려두고 그 안에 원본페이지에 있는 태그를 넣어서 가져옴 
+	text="" => controller에서 Model로 생성된 키명을 출력함 (jstl방식과 동일)	  
+-->
+	<ul>
+		<li th:text="${aa}"></li>
+		<li>거래처 등록</li>
+		<li>외부 창고 입고</li>
+		<li>외부 창고 출고</li>
+		<li>상차 배송</li>
+<!-- 		<li th:text="${product}"></li> -->
+	</ul>
+</header>
+
+<main th:fragment="main">
+<section class="b">
+	<div th:text="${product}"></div>
+	<div>거래처 등록 리스트</div>
+	<div>거래처 등록 추가</div>
+</section>
+
+
+</main>
+
+<footer class="c" th:fragment="copy(copyright)">
+<!-- 	<div>Copyright 2025 WEB</div> -->
+	<div th:text="${copyright}"></div>
+</footer>
+</body>
+</html>

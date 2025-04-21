@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf 전체 구문 중급 언어(Spring EL 표현식)</title>
+</head>
+<body>
+<ul th:switch="${paymethod}">
+<li th:case="1">신용카드</li>
+<li th:case="2">가상계좌</li>
+<li th:case="3">무통장입금</li> <!-- FE로 넘어올때는 모두 String -->
+<!-- th:switch="" ~  th:case="" => 타임리프의 switch~case문 -->
+</ul> <br>
+
+
+<ul >
+<li th:each="no : ${#numbers.sequence(1,5)}">[[${no}]]</li> 
+</ul>  <br>
+<!-- th:each=" 변수 : 달러{}" => 타임리프 반복문.
+	 달러{#numbers.sequence(시작값,종료값)} => 단순 반복 
+	 <li th:each="no : ${#numbers.sequence(1,5)}" th:text="${no}"></li> 라고 쓸수도 있음 -->
+
+
+<!-- 클래스배열 생성하여 뷰로 전달 -->
+<p>칼라선택</p>
+<span th:each="color : ${alldata}" th:text="${color}"></span>
+
+<div th:each="color : ${alldata}">  <!-- controller 배열값을 each설정 -->
+<span th:text="${color}"></span> <br>  <!-- each 출력 -->
+</div>
+
+<div th:each="color : ${alldata}">
+<!-- <span th:text="11">일련번호 : </span> => 이렇게 쓰면 태그사이의 '일련번호'문자 출력 안됨 -->
+<span th:text="|일련번호 : 11|"></span>  <!-- 이렇게 쓰거나  -->
+<span>일련번호 : [[${color}]]</span>   <!-- 이렇게 씀 --> 
+<span th:text="${color}"></span> <br> 
+</div>  <br> 
+
+<div th:each="color, aaa : ${alldata}">
+<span>일련번호 : [[${aaa.index}]]</span>   <br>
+<!-- .index : 0부터 시작 -->
+<span>데이터 총 개수 : [[${aaa.size}]]</span>   <br>
+<!-- .size : 데이터 총 개수 -->
+<span>데이터 카운터 : [[${aaa.count}]]</span>   <br>
+<!-- .count : 1부터 시작  -->
+<span>데이터 홀,짝 : [[${aaa.even}]]</span>  <br>
+<!-- .even : 짝수만 / .odd : 홀수만 => count값 기준으로 짝,홀 구분-->
+</div>  <br>
+
+
+<!-- radio, checkbox 핸들링 -->
+<p>약관동의</p>
+<input type="radio" value="Y" th:checked="${agree == 'Y'}">동의함 
+<input type="radio" value="N" th:checked="${agree == 'N'}">동의안함 <br><br>
+<!--  th:checked="" => radio, checkbox에서 사용하는 속성값 -->
+
+
+<!-- select 핸들링 -->
+<p>회원등급</p>
+<select>
+	<option value="비회원" th:selected="${level=='비회원'}">비회원</option>
+	<option value="일반회원" th:selected="${level=='일반'}">일반회원</option>
+	<option value="실버회원" th:selected="${level=='실버'}">실버회원</option>
+	<option value="골드회원" th:selected="${level=='골드'}">골드회원</option>
+</select>  <br><br>
+
+
+<!-- 현재 시간(윈도우 시간)을 핸들링 -->
+<p>현재시간</p>
+<span th:text="${today}"></span>  <br>
+<span th:text="${#temporals.format(today,'yyyy-MM-dd HH:mm:ss')}"></span> <br>
+<!-- #temporals.format() => LocalDateTime -->
+
+<span th:text="${today2}"></span>  <br>
+<span th:text="${#dates.format(today2,'yyyy-MM-dd  HH:mm:ss')}"></span> <br><br>
+<!-- #dates.format() => Date -->
+
+
+<!-- 자바 클래스 로드 -->
+<span th:text="${T(java.lang.Math).ceil(10/3)}"></span>  <br>
+<span th:text="${T(java.lang.Math).floor(10/3)}"></span>  <br>
+<!-- T() => Type이라는 뜻. 자바 클래스를 로드하는 역할
+	 T(java.lang.Math).round()는 작동안됨. 에러남 
+	 모든 클래스를 다 가져올수 있는게 아니고 
+	 자바 클래스 중에서 상단에 import 안되는 클래스만 가져올 수 있음.  -->
+
+<!-- 해당패키지에 있는 class를 로드하는 방식 -->	 
+<span th:text="${T(kr.co.boot.thymeleaf.thymeleaf_controller)}"></span>  <br>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
